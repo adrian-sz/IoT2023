@@ -3,9 +3,9 @@
     public class Config
     {
         public string ServiceConnectionString { get; set; }
-        public string OpcClientConnectionString {  get; set; }
-        public string StorageConnectionString {  get; set; }
-        
+        public string OpcClientConnectionString { get; set; }
+        public string StorageConnectionString { get; set; }
+
         public Device[] Devices { get; set; }
 
         public Blob[] Blobs { get; set; }
@@ -24,7 +24,7 @@
     public class ProductionKPI
     {
         public string Device { get; set; }
-        public double Kpi { get; set;}
+        public double Kpi { get; set; }
     }
 
     public class DeviceErrors

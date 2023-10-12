@@ -80,7 +80,7 @@ namespace ServiceSdkDemo.Console
 
             int deviceErrorsInt = Convert.ToInt32(DeviceErrors);
             int productionRateInt = Convert.ToInt32(ProductionRate);
-                
+
             await CheckTwinAsync(deviceErrorsInt, productionRateInt);
 
             client.Disconnect();
@@ -104,7 +104,7 @@ namespace ServiceSdkDemo.Console
         private void PrintMessage(Message receivedMessage)
         {
             string messageData = Encoding.ASCII.GetString(receivedMessage.GetBytes());
-            
+
             System.Console.ForegroundColor = ConsoleColor.DarkCyan;
             System.Console.WriteLine($"\t\tReceived message: {messageData}");
 
@@ -211,7 +211,7 @@ namespace ServiceSdkDemo.Console
         public async Task CheckTwinAsync(int deviceErrors, int productionRate)
         {
             string DeviceErrorsString = ((deviceErrorsEnum)deviceErrors).ToString();
-            
+
             var twin = await deviceClient.GetTwinAsync();
 
             int twinProductionRate = productionRate;
@@ -252,30 +252,30 @@ namespace ServiceSdkDemo.Console
             {
                 reportedProperties["deviceErrors"] = deviceError;
                 reportedProperties["lastDeviceErrorsDate"] = DateTime.Today;
-                    var data = new
+                var data = new
+                {
+                    device = $"Device{deviceNumber}",
+                    deviceErrors = deviceError,
+                };
+                var dataString = JsonConvert.SerializeObject(data);
+
+                Message eventMessage = new Message(Encoding.UTF8.GetBytes(dataString));
+                eventMessage.ContentType = MediaTypeNames.Application.Json;
+                eventMessage.ContentEncoding = "utf-8";
+
+                System.Console.WriteLine($"\t{DateTime.Now.ToLocalTime()}> Sending updated device errors data: [{dataString}]");
+
+                try
+                {
+                    if (deviceClient != null)
                     {
-                        device = $"Device{deviceNumber}",
-                        deviceErrors = deviceError,
-                    };
-                    var dataString = JsonConvert.SerializeObject(data);
-
-                    Message eventMessage = new Message(Encoding.UTF8.GetBytes(dataString));
-                    eventMessage.ContentType = MediaTypeNames.Application.Json;
-                    eventMessage.ContentEncoding = "utf-8";
-
-                    System.Console.WriteLine($"\t{DateTime.Now.ToLocalTime()}> Sending updated device errors data: [{dataString}]");
-
-                    try
-                    {
-                        if (deviceClient != null)
-                        {
-                            await deviceClient.SendEventAsync(eventMessage);
-                        }
+                        await deviceClient.SendEventAsync(eventMessage);
                     }
-                    catch (Exception ex)
-                    {
-                        System.Console.WriteLine($"Exception while sending event: {ex.Message}");
-                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine($"Exception while sending event: {ex.Message}");
+                }
             }
             else
             {
@@ -319,7 +319,7 @@ namespace ServiceSdkDemo.Console
             await deviceClient.SetMethodHandlerAsync("EmergencyStop", EmergencyStopHandler, deviceClient);
             await deviceClient.SetMethodHandlerAsync("ResetErrorStatus", ResetErrorStatusHandler, deviceClient);
             await deviceClient.SetMethodHandlerAsync("ReduceProductionRate", ReduceProductionRateHandler, deviceClient);
-            
+
             await deviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertyChanged, deviceClient);
         }
 

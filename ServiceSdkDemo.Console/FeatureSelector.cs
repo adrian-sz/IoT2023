@@ -33,7 +33,7 @@ namespace ServiceSdkDemo.Console
 
                         await manager.SendMessage(messageText, deviceId);
                     }
-                break;
+                    break;
                 case 2:
                     {
                         System.Console.Write("\nType your device id (confirm with enter):\n$>");
@@ -75,7 +75,7 @@ namespace ServiceSdkDemo.Console
                             System.Console.WriteLine($"Device not connected! \n{e.Message}");
                         }
                     }
-                break;
+                    break;
                 case 3:
                     {
                         System.Console.Write("\nType your device id (confirm with enter):\n$>");
@@ -87,14 +87,14 @@ namespace ServiceSdkDemo.Console
                         var random = new Random();
                         await manager.UpdateDesiredTwin(deviceId, propertyName, random.Next());
                     }
-                break;
+                    break;
                 case 4:
                     {
                         await BusinessLogic(manager);
                     }
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
         }
 
@@ -112,7 +112,7 @@ namespace ServiceSdkDemo.Console
             Config config = JsonSerializer.Deserialize<Config>(File.ReadAllText("config.json"));
 
             List<Blob> blobs = new List<Blob>();
-            foreach(var blob in config.Blobs)
+            foreach (var blob in config.Blobs)
             {
                 blobs.Add(blob);
             }
@@ -122,7 +122,7 @@ namespace ServiceSdkDemo.Console
             {
                 string line = File.ReadLines($"{path}\\Blobs\\{blobs[0].BlobName}").First();
                 productionKpi = JsonSerializer.Deserialize<ProductionKPI>(line);
-                if( productionKpi.Kpi < 90.0)
+                if (productionKpi.Kpi < 90.0)
                 {
                     try
                     {
@@ -150,7 +150,7 @@ namespace ServiceSdkDemo.Console
                     }
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 System.Console.WriteLine(ex);
                 System.Console.WriteLine("There was a problem while reading blob files.\nPress any key to close the program...");

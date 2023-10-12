@@ -1,15 +1,15 @@
 {
-  "ServiceConnectionString": "HostName=zajecia-iot-2023.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=IyugUrujvkERqae+9BCAEfC5fB0UZQd/wecRuypC4Sk=",
+  "ServiceConnectionString": "",
   "OpcClientConnectionString": "opc.tcp://localhost:4840/",
-  "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=unistorageclass;AccountKey=cXhda5LPytcFLWeP/23JxvhV9DExeLoNhthbbzwzyyd8SS68s18U4yF3QlNsx5usimyrzMI/HhzH+AStDxzeAg==;EndpointSuffix=core.windows.net",
+  "StorageConnectionString": "",
   "Devices": [
     {
       "DeviceId": "1",
-      "ConnectionString": "HostName=zajecia-iot-2023.azure-devices.net;DeviceId=Device1;SharedAccessKey=MQzQlZn991OLCH5eINij91gLTYEFdgjTRAIoTK5AmCY="
+      "ConnectionString": ""
     },
     {
       "DeviceId": "2",
-      "ConnectionString": "HostName=zajecia-iot-2023.azure-devices.net;DeviceId=Device2;SharedAccessKey=3WlMBJgWrYG2v8k/Db4SsdHJ3hXBZhco5AIoTNoVFp4="
+      "ConnectionString": ""
     }
   ],
   "Blobs": [
