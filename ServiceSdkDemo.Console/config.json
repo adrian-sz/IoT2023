@@ -1,0 +1,26 @@
+{
+  "ServiceConnectionString": "",
+  "OpcClientConnectionString": "opc.tcp://localhost:4840/",
+  "StorageConnectionString": "",
+  "Devices": [
+    {
+      "DeviceId": "1",
+      "ConnectionString": ""
+    },
+    {
+      "DeviceId": "2",
+      "ConnectionString": ""
+    }
+  ],
+  "Blobs": [
+    {
+      "BlobName": "production-kpi.json",
+      "Method": "ReduceProductionRate"
+    },
+    {
+      "BlobName": "device-errors.json",
+      "Method": "EmergencyStop"
+    }
+  ]
+}
+
